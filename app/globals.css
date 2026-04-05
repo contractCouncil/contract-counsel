@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #f5f5f5;
+  --bg-secondary: #111111;
+  --bg-tertiary: #1a1a1a;
+  --text-secondary: #a0a0a0;
+  --text-muted: #666666;
+  --accent: #c8a862;
+  --accent-hover: #e0c078;
+  --border-subtle: #1e1e1e;
+  --border-visible: #2a2a2a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-visible: var(--border-visible);
+  --font-serif: var(--font-playfair), "Georgia", serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Grid pattern for hero background */
+.hero-grid {
+  background-image: linear-gradient(rgba(200, 168, 98, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 168, 98, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Radial glow */
+.hero-glow {
+  background: radial-gradient(ellipse 600px 400px at center, rgba(200, 168, 98, 0.08), transparent);
+}
+
+/* Section top glow border */
+.section-glow-top {
+  position: relative;
+}
+.section-glow-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.3;
 }
