@@ -1,7 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Button from "../ui/Button";
+import FloatingElements from "../ui/FloatingElements";
 import { FiArrowDown } from "react-icons/fi";
 
 const containerVariants = {
@@ -22,17 +24,47 @@ const itemVariants = {
 };
 
 export default function Hero() {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 hero-grid" />
-      <div className="absolute inset-0 hero-glow" />
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
 
+  // Background moves slower (parallax)
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const glowY = useTransform(scrollYProgress, [0, 1], [0, 100]);
+
+  // Content fades/scales/drifts as user scrolls past
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1, 0]);
+  const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -80]);
+
+  // Scroll arrow fades out quickly
+  const arrowOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      {/* Background effects with parallax */}
+      <motion.div className="absolute inset-0 hero-grid" style={{ y: bgY }} />
+      <motion.div className="absolute inset-0 hero-glow" style={{ y: glowY }} />
+
+      {/* Floating decorative elements */}
+      <FloatingElements count={6} seed={42} />
+
+      {/* Content with scroll-driven fade/scale */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
         className="relative z-10 max-w-4xl mx-auto px-6 text-center"
+        style={{
+          opacity: contentOpacity,
+          scale: contentScale,
+          y: contentY,
+        }}
       >
         <motion.p
           variants={itemVariants}
@@ -72,10 +104,11 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - fades out on scroll */}
       <motion.a
         href="#services"
         className="absolute bottom-10 left-1/2 -translate-x-1/2 text-text-muted hover:text-accent transition-colors"
+        style={{ opacity: arrowOpacity }}
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       >
