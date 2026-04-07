@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #f5f5f5;
-  --bg-secondary: #111111;
-  --bg-tertiary: #1a1a1a;
-  --text-secondary: #a0a0a0;
-  --text-muted: #666666;
-  --accent: #c8a862;
-  --accent-hover: #e0c078;
-  --border-subtle: #1e1e1e;
-  --border-visible: #2a2a2a;
+  --background: #08070a;
+  --foreground: #fafaf7;
+  --bg-secondary: #110f14;
+  --bg-tertiary: #1a171f;
+  --text-secondary: #c4bfb5;
+  --text-muted: #807a70;
+  --accent: #e8b84a;
+  --accent-hover: #f5cc6b;
+  --accent-deep: #b8881a;
+  --border-subtle: #221e28;
+  --border-visible: #332d3c;
 }
 
 @theme inline {
@@ -22,6 +23,7 @@
   --color-text-muted: var(--text-muted);
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
+  --color-accent-deep: var(--accent-deep);
   --color-border-subtle: var(--border-subtle);
   --color-border-visible: var(--border-visible);
   --font-serif: var(--font-playfair), "Georgia", serif;
@@ -40,72 +42,209 @@ html {
 
 /* Grid pattern for hero background */
 .hero-grid {
-  background-image: linear-gradient(rgba(200, 168, 98, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200, 168, 98, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(232, 184, 74, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232, 184, 74, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
 /* Radial glow */
 .hero-glow {
-  background: radial-gradient(ellipse 600px 400px at center, rgba(200, 168, 98, 0.08), transparent);
+  background: radial-gradient(ellipse 600px 400px at center, rgba(232, 184, 74, 0.08), transparent);
 }
 
-/* Aurora mesh — animated ambient gradient base */
-.hero-aurora {
+
+/* ---------- Document Carousel ---------- */
+.doc-stage {
   position: absolute;
   inset: 0;
-  overflow: hidden;
+  perspective: 1600px;
+  perspective-origin: 50% 50%;
   pointer-events: none;
+  overflow: visible;
 }
-.hero-aurora__blob {
+.doc-rig {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
-  will-change: transform, opacity;
-  mix-blend-mode: screen;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  animation: rigSpin 30s linear infinite;
+  transform: translate(-50%, -50%) rotateX(-8deg);
 }
-.hero-aurora__blob--1 {
-  width: 60vw;
-  height: 60vw;
-  left: -10vw;
-  top: -15vw;
-  background: radial-gradient(circle, rgba(200, 168, 98, 0.22), transparent 70%);
-  animation: auroraDrift1 22s ease-in-out infinite;
+.doc-rig.is-static { animation: none; }
+@keyframes rigSpin {
+  0%   { transform: translate(-50%, -50%) rotateX(-8deg) rotateY(0deg); }
+  100% { transform: translate(-50%, -50%) rotateX(-8deg) rotateY(360deg); }
 }
-.hero-aurora__blob--2 {
-  width: 55vw;
-  height: 55vw;
-  right: -12vw;
-  top: 10vh;
-  background: radial-gradient(circle, rgba(80, 120, 200, 0.18), transparent 70%);
-  animation: auroraDrift2 26s ease-in-out infinite;
+
+.doc-card {
+  position: absolute;
+  left: -130px;
+  top: -170px;
+  width: 260px;
+  height: 340px;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  will-change: transform;
 }
-.hero-aurora__blob--3 {
-  width: 50vw;
-  height: 50vw;
-  left: 20vw;
-  bottom: -20vw;
-  background: radial-gradient(circle, rgba(200, 168, 98, 0.14), transparent 70%);
-  animation: auroraDrift3 30s ease-in-out infinite;
+.doc-card__sheet {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(180deg, rgba(20, 20, 22, 0.92) 0%, rgba(14, 14, 16, 0.92) 100%);
+  border: 1px solid rgba(232, 184, 74, 0.35);
+  border-radius: 3px;
+  padding: 20px 22px;
+  box-shadow:
+    0 0 0 1px rgba(232, 184, 74, 0.08),
+    0 30px 80px -20px rgba(0, 0, 0, 0.85),
+    0 0 40px rgba(232, 184, 74, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
 }
-@keyframes auroraDrift1 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.9; }
-  50% { transform: translate3d(6vw, 4vh, 0) scale(1.1); opacity: 1; }
+.doc-card__title {
+  font-family: var(--font-serif);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: rgba(232, 184, 74, 0.85);
+  text-align: center;
+  margin-bottom: 10px;
 }
-@keyframes auroraDrift2 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); opacity: 0.85; }
-  50% { transform: translate3d(-5vw, 6vh, 0) scale(0.95); opacity: 1; }
+.doc-card__rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232, 184, 74, 0.5), transparent);
+  margin-bottom: 16px;
 }
-@keyframes auroraDrift3 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.7; }
-  50% { transform: translate3d(4vw, -5vh, 0) scale(1.15); opacity: 0.95; }
+.doc-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.doc-card__footer {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(232, 184, 74, 0.25);
+}
+.doc-card__sig-label {
+  font-size: 6px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: rgba(232, 184, 74, 0.6);
+  margin-bottom: 4px;
+}
+.doc-card__sig-line {
+  position: relative;
+  height: 14px;
+  border-bottom: 1px solid rgba(245, 245, 245, 0.4);
+}
+.doc-card__sig-x {
+  position: absolute;
+  left: 4px;
+  top: -4px;
+  font-size: 14px;
+  color: rgba(232, 184, 74, 0.85);
+  font-family: serif;
+}
+.doc-card__corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(225deg, rgba(232, 184, 74, 0.4) 50%, transparent 50%);
+  border-left: 1px solid rgba(232, 184, 74, 0.35);
+  border-bottom: 1px solid rgba(232, 184, 74, 0.35);
+}
+.doc-line-wrap {
+  position: relative;
+  height: 5px;
+}
+.doc-line {
+  height: 2px;
+  background: rgba(245, 245, 245, 0.42);
+  border-radius: 1px;
+}
+.doc-line__highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, transparent, #c8a862 30%, #e0c078 50%, #c8a862 70%, transparent);
+  box-shadow: 0 0 8px rgba(232, 184, 74, 0.9), 0 0 16px rgba(232, 184, 74, 0.5);
+  transform-origin: left center;
+  animation: lineSweep linear infinite;
+  opacity: 0;
+}
+@keyframes lineSweep {
+  0%, 100% { opacity: 0; transform: scaleX(0); }
+  2%       { opacity: 1; transform: scaleX(0); }
+  8%       { opacity: 1; transform: scaleX(1); }
+  16%      { opacity: 1; transform: scaleX(1); }
+  22%      { opacity: 0; transform: scaleX(1); }
+}
+
+.doc-scanbeam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 140px;
+  top: 0;
+  margin-top: -70px;
+  pointer-events: none;
+  /* Bright core line + soft vertical halo, both bound to the painted area */
+  background:
+    linear-gradient(180deg, transparent 48%, rgba(255, 230, 160, 0.95) 50%, transparent 52%),
+    radial-gradient(ellipse 55% 50% at 50% 50%, rgba(232, 184, 74, 0.35) 0%, rgba(232, 184, 74, 0.12) 40%, transparent 75%);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.15) 18%,
+    rgba(0, 0, 0, 0.6) 32%,
+    #000 50%,
+    rgba(0, 0, 0, 0.6) 68%,
+    rgba(0, 0, 0, 0.15) 82%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.15) 18%,
+    rgba(0, 0, 0, 0.6) 32%,
+    #000 50%,
+    rgba(0, 0, 0, 0.6) 68%,
+    rgba(0, 0, 0, 0.15) 82%,
+    transparent 100%
+  );
+  animation: scanbeamMove 3s ease-in-out infinite;
+}
+@keyframes scanbeamMove {
+  0%   { top: 18%; opacity: 0; }
+  10%  { opacity: 1; }
+  50%  { top: 82%; opacity: 1; }
+  60%  { opacity: 0; }
+  100% { top: 18%; opacity: 0; }
 }
 @media (max-width: 768px) {
-  .hero-aurora__blob { filter: blur(60px); }
-  .hero-aurora__blob--3 { display: none; }
+  .doc-stage { perspective: 1100px; }
+  .doc-card {
+    width: 200px;
+    height: 270px;
+    left: -100px;
+    top: -135px;
+  }
+  .doc-card__sheet { padding: 14px 16px; }
+  .doc-card__title { font-size: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-aurora__blob { animation: none; }
+  .doc-rig { animation: none; }
+  .doc-line__highlight { animation: none; opacity: 0; }
+  .doc-scanbeam { animation: none; opacity: 0; }
 }
 
 /* Section top glow border */

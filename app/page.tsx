@@ -5,6 +5,7 @@ import Services from "@/components/sections/Services";
 import HowItWorks from "@/components/sections/HowItWorks";
 import About from "@/components/sections/About";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
+import Impact from "@/components/sections/Impact";
 import Contact from "@/components/sections/Contact";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import ScrollProgress from "@/components/ui/ScrollProgress";
@@ -20,6 +21,7 @@ export default function Home() {
         <HowItWorks />
         <About />
         <WhyChooseUs />
+        <Impact />
         <Contact />
       </main>
       <Footer />
