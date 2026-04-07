@@ -1,27 +1,13 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Button from "../ui/Button";
-import FloatingElements from "../ui/FloatingElements";
+import RevealText, { RevealLine } from "../ui/RevealText";
 import { FiArrowDown } from "react-icons/fi";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.3 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
-  },
-};
+const DocumentTower = dynamic(() => import("../ui/DocumentTower"), { ssr: false });
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -30,84 +16,94 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  // Background moves slower (parallax)
   const bgY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const glowY = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const towerOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const towerScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
-  // Content fades/scales/drifts as user scrolls past
   const contentOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1, 0]);
-  const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, -80]);
-
-  // Scroll arrow fades out quickly
   const arrowOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-hidden"
     >
-      {/* Background effects with parallax */}
+      {/* Subtle grid */}
       <motion.div className="absolute inset-0 hero-grid" style={{ y: bgY }} />
-      <motion.div className="absolute inset-0 hero-glow" style={{ y: glowY }} />
 
-      {/* Floating decorative elements */}
-      <FloatingElements count={6} seed={42} />
-
-      {/* Content with scroll-driven fade/scale */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 max-w-4xl mx-auto px-6 text-center"
-        style={{
-          opacity: contentOpacity,
-          scale: contentScale,
-          y: contentY,
-        }}
-      >
-        <motion.p
-          variants={itemVariants}
-          className="text-accent text-xs md:text-sm font-semibold uppercase tracking-[0.3em] mb-6"
-        >
-          AI-Powered Legal Technology
-        </motion.p>
-
-        <motion.h1
-          variants={itemVariants}
-          className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight mb-6"
-        >
-          Redefining How{" "}
-          <span className="text-accent">Legal Work</span>{" "}
-          Gets Done
-        </motion.h1>
-
-        <motion.p
-          variants={itemVariants}
-          className="text-text-secondary text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10"
-        >
-          Intelligent technology that empowers lawyers and legal professionals
-          to operate at peak accuracy — approaching 100% — while dramatically
-          cutting the time spent on routine legal tasks.
-        </motion.p>
-
+      {/* Two-column hero */}
+      <div className="relative z-10 w-full max-w-[1500px] mx-auto px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
+        {/* Text column */}
         <motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="lg:col-span-5 text-center lg:text-left"
+          style={{ opacity: contentOpacity, y: contentY }}
         >
-          <Button href="#contact" variant="primary">
-            Book a Demo
-          </Button>
-          <Button href="#services" variant="secondary">
-            Explore Services
-          </Button>
-        </motion.div>
-      </motion.div>
+          <p className="text-accent text-xs md:text-sm font-semibold uppercase tracking-[0.3em] mb-6">
+            <RevealLine delay={0.1} duration={0.7}>
+              AI-Powered Legal Technology
+            </RevealLine>
+          </p>
 
-      {/* Scroll indicator - fades out on scroll */}
+          <h1
+            className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.05] mb-6"
+            aria-label="Redefining How Legal Work Gets Done"
+          >
+            <RevealText as="span" className="block" delay={0.25} stagger={0.09}>
+              Redefining How
+            </RevealText>
+            <RevealText
+              as="span"
+              className="block text-accent"
+              delay={0.45}
+              stagger={0.09}
+            >
+              Legal Work
+            </RevealText>
+            <RevealText as="span" className="block" delay={0.65} stagger={0.09}>
+              Gets Done
+            </RevealText>
+          </h1>
+
+          <p className="text-text-secondary text-base md:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10">
+            <RevealLine delay={1.0} duration={0.9}>
+              Intelligent technology that empowers lawyers and legal professionals
+            </RevealLine>{" "}
+            <RevealLine delay={1.15} duration={0.9}>
+              to operate at peak accuracy — approaching 100% — while dramatically
+            </RevealLine>{" "}
+            <RevealLine delay={1.3} duration={0.9}>
+              cutting the time spent on routine legal tasks.
+            </RevealLine>
+          </p>
+
+          <motion.div
+            className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.55, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Button href="#contact" variant="primary">
+              Book a Demo
+            </Button>
+            <Button href="#services" variant="secondary">
+              Explore Services
+            </Button>
+          </motion.div>
+        </motion.div>
+
+        {/* Carousel column */}
+        <motion.div
+          className="lg:col-span-7 relative h-[460px] lg:h-[640px] order-first lg:order-last"
+          style={{ opacity: towerOpacity, scale: towerScale }}
+        >
+          <DocumentTower />
+        </motion.div>
+      </div>
+
       <motion.a
         href="#services"
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-text-muted hover:text-accent transition-colors"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-text-muted hover:text-accent transition-colors z-10"
         style={{ opacity: arrowOpacity }}
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

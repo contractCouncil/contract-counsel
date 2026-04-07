@@ -66,7 +66,7 @@ function FeatureCard({
 
   return (
     <motion.div ref={ref} style={{ opacity, y, scale }}>
-      <div className="group relative rounded-2xl border border-border-subtle bg-background p-6 transition-all duration-300 hover:border-accent/30 hover:shadow-[0_0_30px_rgba(200,168,98,0.06)] h-full">
+      <div className="group relative rounded-2xl border border-border-subtle bg-background p-6 transition-all duration-300 hover:border-accent/30 hover:shadow-[0_0_30px_rgba(232,184,74,0.06)] h-full">
         <div className="flex items-start gap-4">
           <div className="shrink-0 rounded-xl bg-accent/10 p-3 transition-colors duration-300 group-hover:bg-accent/20">
             <feature.icon size={22} className="text-accent" />

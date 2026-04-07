@@ -93,20 +93,20 @@ function FloatingShape({
           width: shape.size,
           height: shape.size,
           borderRadius: "50%",
-          background: `radial-gradient(circle, rgba(200,168,98,${shape.opacity}), transparent)`,
+          background: `radial-gradient(circle, rgba(232,184,74,${shape.opacity}), transparent)`,
         };
       case "diamond":
         return {
           width: shape.size * 0.7,
           height: shape.size * 0.7,
-          border: `1px solid rgba(200,168,98,${shape.opacity})`,
+          border: `1px solid rgba(232,184,74,${shape.opacity})`,
           rotate: "45deg",
         };
       case "line":
         return {
           width: 1,
           height: shape.size,
-          background: `linear-gradient(to bottom, transparent, rgba(200,168,98,${shape.opacity + 0.02}), transparent)`,
+          background: `linear-gradient(to bottom, transparent, rgba(232,184,74,${shape.opacity + 0.02}), transparent)`,
         };
     }
   })();
