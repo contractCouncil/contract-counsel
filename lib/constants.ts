@@ -6,7 +6,7 @@ export const siteConfig = {
   description:
     "Redefining how legal work gets done. AI-powered contract review, drafting, document review, legal documentation, and eDiscovery for law firms.",
   email: "team@contractconsel.com",
-  phone: "+1 (555) 000-0000",
+  phone: "+91 93691 17882",
 };
 
 export const navItems = [
