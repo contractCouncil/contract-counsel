@@ -46,7 +46,7 @@ export default function AnimatedChart() {
         viewBox={`0 0 ${W} ${H}`}
         className="w-full h-auto"
         role="img"
-        aria-label="Average contract review hours: manual vs ContractCounsel"
+        aria-label="Average contract review hours: manual vs ContractConsel"
       >
         <defs>
           <linearGradient id="aiArea" x1="0" y1="0" x2="0" y2="1">
@@ -286,7 +286,7 @@ export default function AnimatedChart() {
         </div>
         <div className="flex items-center gap-2">
           <span className="inline-block w-6 h-[3px] rounded-full bg-accent shadow-[0_0_10px_rgba(232,184,74,0.6)]" />
-          <span className="text-text-secondary">ContractCounsel AI</span>
+          <span className="text-text-secondary">ContractConsel AI</span>
         </div>
       </div>
     </div>

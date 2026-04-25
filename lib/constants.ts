@@ -1,11 +1,11 @@
 import { FiFileText, FiEdit, FiSearch, FiFolder, FiDatabase } from "react-icons/fi";
 
 export const siteConfig = {
-  name: "ContractCounsel",
+  name: "ContractConsel",
   tagline: "Est. Legal Outsourcing",
   description:
     "Redefining how legal work gets done. AI-powered contract review, drafting, document review, legal documentation, and eDiscovery for law firms.",
-  email: "info@contractcounsel.ai",
+  email: "team@contractconsel.com",
   phone: "+1 (555) 000-0000",
 };
 

@@ -81,7 +81,7 @@ export default function About() {
 
         <ScrollRevealText className="max-w-3xl mx-auto text-center mb-8">
           <p className="text-text-secondary text-lg leading-relaxed">
-            ContractCounsel is an AI company redefining how legal work gets done.
+            ContractConsel is an AI company redefining how legal work gets done.
             We&apos;ve built intelligent technology that empowers lawyers and legal
             professionals to operate at peak accuracy — approaching 100% — while
             dramatically cutting the time spent on routine legal tasks.

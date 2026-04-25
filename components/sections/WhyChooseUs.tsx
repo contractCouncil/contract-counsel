@@ -93,7 +93,7 @@ export default function WhyChooseUs() {
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         <AnimatedSection>
           <SectionHeading
-            title="Why ContractCounsel"
+            title="Why ContractConsel"
             subtitle="The competitive edge your legal team has been looking for"
           />
         </AnimatedSection>

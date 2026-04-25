@@ -36,7 +36,7 @@ export default function Contact() {
           <AnimatedSection>
             <SectionHeading
               title="Ready to Transform Your Legal Operations?"
-              subtitle="Book a demo to see how ContractCounsel can help your team work smarter"
+              subtitle="Book a demo to see how ContractConsel can help your team work smarter"
             />
           </AnimatedSection>
 
@@ -50,7 +50,7 @@ export default function Contact() {
                 <p className="text-text-secondary leading-relaxed mb-8">
                   Whether you&apos;re a law firm looking to enhance accuracy, or a business
                   seeking smarter contract management, we&apos;d love to show you what
-                  ContractCounsel can do.
+                  ContractConsel can do.
                 </p>
                 <div className="space-y-4">
                   <a

@@ -15,7 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ContractCounsel | AI-Powered Legal Technology",
+  title: "ContractConsel | AI-Powered Legal Technology",
   description:
     "Redefining how legal work gets done. AI-powered contract review, drafting, document review, legal documentation, and eDiscovery for law firms and businesses.",
   keywords: [
@@ -24,18 +24,18 @@ export const metadata: Metadata = {
     "legal document automation",
     "eDiscovery AI",
     "contract drafting",
-    "ContractCounsel",
+    "ContractConsel",
   ],
   openGraph: {
-    title: "ContractCounsel | AI-Powered Legal Technology",
+    title: "ContractConsel | AI-Powered Legal Technology",
     description:
       "Intelligent technology that empowers lawyers to operate at peak accuracy.",
-    siteName: "ContractCounsel",
+    siteName: "ContractConsel",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ContractCounsel | AI-Powered Legal Technology",
+    title: "ContractConsel | AI-Powered Legal Technology",
     description:
       "Intelligent technology that empowers lawyers to operate at peak accuracy.",
   },

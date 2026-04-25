@@ -1,10 +1,10 @@
-# ContractCounsel
+# ContractConsel
 
 AI-powered legal technology platform redefining how legal work gets done.
 
 ## About
 
-ContractCounsel is an AI company that empowers lawyers and legal professionals to operate at peak accuracy while dramatically cutting the time spent on routine legal tasks. We sit at the intersection of artificial intelligence and legal services.
+ContractConsel is an AI company that empowers lawyers and legal professionals to operate at peak accuracy while dramatically cutting the time spent on routine legal tasks. We sit at the intersection of artificial intelligence and legal services.
 
 ## Services
 

@@ -12,7 +12,7 @@ export default function Impact() {
         <AnimatedSection>
           <SectionHeading
             title="Measured Impact"
-            subtitle="Real numbers from real legal teams using ContractCounsel"
+            subtitle="Real numbers from real legal teams using ContractConsel"
           />
         </AnimatedSection>
 
