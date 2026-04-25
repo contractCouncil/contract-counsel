@@ -7,6 +7,7 @@ export const siteConfig = {
     "Redefining how legal work gets done. AI-powered contract review, drafting, document review, legal documentation, and eDiscovery for law firms.",
   email: "team@contractconsel.com",
   phone: "+91 93691 17882",
+  calendlyUrl: "https://calendly.com/ishanshrivastava00528/30min",
 };
 
 export const navItems = [

@@ -1,15 +1,14 @@
 "use client";
 
-import { useRef, useState, type FormEvent } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import SectionHeading from "../ui/SectionHeading";
 import AnimatedSection from "../ui/AnimatedSection";
-import Button from "../ui/Button";
+import CalendlyEmbed from "../ui/CalendlyEmbed";
 import { siteConfig } from "@/lib/constants";
 import { FiMail, FiPhone } from "react-icons/fi";
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -19,11 +18,6 @@ export default function Contact() {
 
   const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
   const opacity = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
 
   return (
     <section
@@ -36,13 +30,13 @@ export default function Contact() {
           <AnimatedSection>
             <SectionHeading
               title="Ready to Transform Your Legal Operations?"
-              subtitle="Book a demo to see how ContractConsel can help your team work smarter"
+              subtitle="Pick a 30-minute slot to see how ContractConsel can help your team work smarter"
             />
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 max-w-6xl mx-auto items-start">
             {/* Left - Info */}
-            <AnimatedSection delay={0.1}>
+            <AnimatedSection delay={0.1} className="lg:col-span-4">
               <div>
                 <h3 className="font-serif text-2xl font-semibold text-foreground mb-4">
                   Get in Touch
@@ -71,46 +65,9 @@ export default function Contact() {
               </div>
             </AnimatedSection>
 
-            {/* Right - Form */}
-            <AnimatedSection delay={0.2}>
-              {submitted ? (
-                <div className="flex items-center justify-center h-full rounded-2xl border border-accent/30 bg-accent/5 p-8">
-                  <div className="text-center">
-                    <p className="font-serif text-2xl text-foreground mb-2">Thank You!</p>
-                    <p className="text-text-secondary">
-                      We&apos;ll be in touch shortly to schedule your demo.
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <input
-                    type="text"
-                    placeholder="Name"
-                    required
-                    className="w-full rounded-xl border border-border-visible bg-bg-tertiary px-5 py-3 text-foreground placeholder:text-text-muted focus:border-accent focus:outline-none transition-colors"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    required
-                    className="w-full rounded-xl border border-border-visible bg-bg-tertiary px-5 py-3 text-foreground placeholder:text-text-muted focus:border-accent focus:outline-none transition-colors"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Company"
-                    className="w-full rounded-xl border border-border-visible bg-bg-tertiary px-5 py-3 text-foreground placeholder:text-text-muted focus:border-accent focus:outline-none transition-colors"
-                  />
-                  <textarea
-                    placeholder="Tell us about your legal needs"
-                    rows={4}
-                    className="w-full rounded-xl border border-border-visible bg-bg-tertiary px-5 py-3 text-foreground placeholder:text-text-muted focus:border-accent focus:outline-none transition-colors resize-none"
-                  />
-                  <Button type="submit" variant="primary" className="w-full">
-                    Book a Demo
-                  </Button>
-                </form>
-              )}
+            {/* Right - Calendly */}
+            <AnimatedSection delay={0.2} className="lg:col-span-8">
+              <CalendlyEmbed url={siteConfig.calendlyUrl} />
             </AnimatedSection>
           </div>
         </div>
